@@ -11,6 +11,10 @@
             },
             success: function(data) {
                 console.log(data)
+                if (data.success) {
+                    window.location.href = '/home'
+                    window.sessionStorage.setItem('user', JSON.stringify(data.data))
+                }
             },
             error: function() { //请求失败
                 console.log('请求失败');

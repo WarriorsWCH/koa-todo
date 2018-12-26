@@ -7,10 +7,8 @@ CREATE TABLE   IF NOT EXISTS  `user` (
   `detail_info` json DEFAULT NULL,
   `create_time` varchar(20) DEFAULT NULL,
   `modified_time` varchar(20) DEFAULT NULL,
-  `level` int(11) DEFAULT NULL,
+  `level` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `user` set email='1@example.com', password='123456', name='tom';
-INSERT INTO `user` set email='2@example.com', password='123456', name='jack';
-INSERT INTO `user` set email='3@example.com', password='123456', name='lili';
+INSERT INTO `user` set email='123123123@example.com', password='123456', name='admin';

@@ -2,7 +2,7 @@
 const router = require('koa-router')()
 
 const routers = router.get('/', async(ctx) => {
-    await ctx.render('index', {
+    await ctx.render('login', {
         title: 'ToDo List'
     })
 })

@@ -10,9 +10,9 @@ const user = {
     },
 
     // 根据用户名密码查找用户
-    async login(options) {
+    async login(model) {
         let _sql = `SELECT * FROM user WHERE 
-        password="${options.password}" and name="${options.name}" limit 1`
+        password="${model.password}" and name="${model.name}" limit 1`
         let result = await db.query(_sql)
         console.log('sql:', result)
         if (Array.isArray(result)) {

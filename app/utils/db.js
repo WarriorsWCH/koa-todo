@@ -41,7 +41,7 @@ let findDataByPage = function(table, keys, start, end) {
     return query(_sql, [keys, table, start, end])
 }
 
-let insertData = function(tanle, values) {
+let insertData = function(table, values) {
     let _sql = 'INSERT INTO ?? SET ?'
     return query(_sql, [table, values])
 }
