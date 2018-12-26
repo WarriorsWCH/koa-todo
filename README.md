@@ -22,6 +22,7 @@ show tables;
 drop table if exists student;
 
 ### 8.创建表
+```
 create table student(
 id int auto_increment primary key,
 name varchar(50),
@@ -29,6 +30,7 @@ sex varchar(20),
 date varchar(50),
 content varchar(100)
 )default charset=utf8;
+```
 
 ### 9.删除表
 drop table student;
@@ -38,10 +40,7 @@ describe student;  #可以简写为desc student;
 
 ### 11.插入数据
 insert into student values(null,'aa','男','1988-10-2','......');
-insert into student values(null,'bb','女','1889-03-6','......');
-insert into student values(null,'cc','男','1889-08-8','......');
-insert into student values(null,'dd','女','1889-12-8','......');
-insert into student values(null,'ee','女','1889-09-6','......');
+
 insert into student values(null,'ff','null','1889-09-6','......');
 ### 12.查询表中的数据
 select * from student;
@@ -91,18 +90,26 @@ delete from c where age=21;
 
 ### 23.常用查询语句
 select name,age ,id from c
+
 select * from c where age>40 and age<60;  #and
+
 select * from c where age<40 or age<60;  #or
+
 select * from c where age between 40 and 60 #between
+
 select * from c where age in (30,48,68,99);     #in 查询指定集合内的数据
+
 select * from c order by age desc;      #order by （asc升序 des降序）
 
 ### 24.分组查询
 select name,max(age) from c group by sex;  #按性别分组查年龄最大值
 ### 25.聚合函数
 select min(age) from c;
+
 select avg(age) as '平均年龄 ' from c;
+
 select count(*) from c;  #统计表中数据总数
+
 select sum(age) from c;
 
 ### 26.修改表的名字
@@ -110,6 +117,7 @@ alter table tbl_name rename to new_name
 alter table c rename to a;
  
 ### 27.表结构修改
+```
 create table test
 (
 id int not null auto_increment primary key, #设定主键
@@ -118,6 +126,7 @@ department_id int not null,
 position_id int not null,
 unique (department_id,position_id) #设定唯一值
 );
+```
 
 ### 28.修改表的名字
 alter table tbl_name rename to new_name
