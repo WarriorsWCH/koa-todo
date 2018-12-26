@@ -81,6 +81,7 @@
      * 渲染所有Task模板
      * */
     function render_task_list() {
+        $no_task.hide();
         var $todo_list = $('.todo-list');
         $todo_list.html('');
         var complete_items = []; // 已完成
@@ -128,9 +129,22 @@
     function listen_checkbox_complete(data) {
         $('.toggle').click(function() {
             $task_list[$(this).data('index')].is_completed = !$task_list[$(this).data('index')].is_completed;
-            store.set('task_list', $task_list);
             $(this).parent().toggleClass("completed");
-            render_task_list();
+            $.ajax({
+                type: "POST",
+                url: "/api/list/update.json",
+                data: $task_list[$(this).data('index')],
+                success: function(data) {
+                    console.log(data)
+                    if (data.success) {
+                        $task_list = data.data;
+                        is_rander();
+                    }
+                },
+                error: function() { //请求失败
+                    console.log('请求失败');
+                },
+            });
         });
     }
     // 删除Task
@@ -141,9 +155,21 @@
             // 确认删除
             pop().then(function(f) {
                 if (f) {
-                    data.splice(index, 1);
-                    store.set('task_list', $task_list);
-                    render_task_list(navStatus);
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/list/delete.json",
+                        data: data[index],
+                        success: function(data) {
+                            console.log(data)
+                            if (data.success) {
+                                $task_list = data.data;
+                                is_rander();
+                            }
+                        },
+                        error: function() { //请求失败
+                            console.log('请求失败');
+                        },
+                    });
                 }
             })
         });
@@ -213,17 +239,15 @@
                         data: data[index],
                         success: function(data) {
                             console.log(data)
-                                // if (data.success) {
-                                //     $task_list = data.data;
-                                //     is_rander();
-                                // }
+                            if (data.success) {
+                                $task_list = data.data;
+                                is_rander();
+                            }
                         },
                         error: function() { //请求失败
                             console.log('请求失败');
                         },
                     });
-                    // store.set('task_list', $task_list);
-                    render_task_list(navStatus);
                 }
             })
         })

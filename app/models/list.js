@@ -21,9 +21,15 @@ const list = {
     },
     // 更新某条todo list
     async updateOneList(model) {
-        console.log(model, 'd')
-        let _sql = 'UPDATE data SET title = ?,des = ?,remind_time = ? WHERE id = ?'
-        let result = await db.query(_sql, [model.title, model.des, model.remind_time, model.id])
+        model.is_completed = model.is_completed ? 1 : 0
+        let _sql = 'UPDATE data SET title = ?,des = ?,remind_time = ?, is_completed = ? WHERE id = ?'
+        let result = await db.query(_sql, [model.title, model.des, model.remind_time, model.is_completed, model.id])
+        return result
+    },
+    // 删除某条todo list
+    async deleteOneList(model) {
+        let _sql = 'delete from data where id = ?'
+        let result = await db.query(_sql, [model.id])
         return result
     }
 }

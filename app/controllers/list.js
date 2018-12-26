@@ -54,12 +54,33 @@ module.exports = {
             data: [],
             code: '10000'
         }
-
         let listResult = await list.updateOneList(formData)
         console.log('更新结果：', listResult)
         if (!listResult.changedRows) {
             result.success = false
             result.message = '更新失败'
+            result.code = '19003'
+        } else {
+            let r = await list.getAllList({ uid: formData.uid })
+            result.data = r
+        }
+        ctx.body = result
+    },
+    // 删除
+    async deleteData(ctx) {
+        let formData = ctx.request.body
+        let result = {
+            success: true,
+            message: 'ok',
+            data: [],
+            code: '10000'
+        }
+
+        let listResult = await list.deleteOneList(formData)
+        console.log('删除结果：', listResult)
+        if (!listResult) {
+            result.success = false
+            result.message = '删除失败'
             result.code = '19003'
         } else {
             let r = await list.getAllList({ uid: formData.uid })
